@@ -78,15 +78,17 @@ const fetchOwnersWithCats = callback => {
       let counter = 0;
       let finalArr = [];
       finalArr.length = ownersArr.length;
-      ownersArr.map((ownerName, i) => {
+      ownersArr.forEach((ownerName, i) => {
         fetchCatsByOwner(ownerName, (err, catsByOwner) => {
           let catOwnerObject = { owner: ownerName, cats: catsByOwner };
-          finalArr.splice(i, 0, catOwnerObject);
           counter++;
+          finalArr.splice(i, 1, catOwnerObject);
           if (counter === ownersArr.length) {
-            let filteredFinalArr = finalArr.filter(element => element);
             if (err) callback(err);
-            else callback(null, filteredFinalArr);
+            else {
+              let filteredFinalArr = finalArr.filter(element => element);
+              callback(null, filteredFinalArr);
+            }
           }
         });
       });
@@ -94,9 +96,25 @@ const fetchOwnersWithCats = callback => {
   });
 };
 
-const kickLegacyServerUntilItWorks = () => {};
+const kickLegacyServerUntilItWorks = callback => {
+  request(`/legacy-status`, (err, outcome) => {
+    if (err) kickLegacyServerUntilItWorks(callback);
+    else callback(null, outcome);
+  });
+};
 
-const buySingleOutfit = () => {};
+const buySingleOutfit = (outfitName, callback) => {
+  let counter = 0;
+  request(`/outfits/${outfitName}`, (err, outfit) => {
+    if (err) callback(err);
+    else {
+      counter++;
+      if (counter === 1) {
+        callback(null, outfit);
+      }
+    }
+  });
+};
 
 module.exports = {
   buySingleOutfit,
