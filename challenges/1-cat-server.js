@@ -108,9 +108,9 @@ const buySingleOutfit = (outfitName, callback) => {
   request(`/outfits/${outfitName}`, (err, outfit) => {
     if (err) callback(err);
     else {
-      counter++;
-      if (counter === 1) {
+      if (counter < 1) {
         callback(null, outfit);
+        counter++;
       }
     }
   });

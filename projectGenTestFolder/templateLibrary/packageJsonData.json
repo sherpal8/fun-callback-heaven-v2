@@ -1,5 +1,5 @@
 {
-  "name": "BE-callback-heaven",
+  "name": "Project generator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,9 +19,7 @@
   "homepage": "https://github.com/northcoders/BE-callback-heaven#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.3.0",
-    "eslint-config-defaults": "^9.0.0",
-    "mocha": "^6.2.0",
+    "mocha": "^6.1.4",
     "prettier": "^1.16.4"
   }
 }

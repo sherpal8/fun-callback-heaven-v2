@@ -1,1 +1,1 @@
-// to be populated
+This is an auto generated folder by projectGenerator.
